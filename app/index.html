@@ -5,7 +5,7 @@
 <!--[if gt IE 8]><!--> <html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
 <head>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>My AngularJS App</title>
+  <title>Bracket Creator</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="bower_components/html5-boilerplate/css/normalize.css">
@@ -14,22 +14,33 @@
   <script src="bower_components/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js"></script>
 </head>
 <body>
-  <ul class="menu">
-    <li><a href="#/view1">view one</a></li>
-    <li><a href="#/view2">view two</a></li>
-  </ul>
+  <br><br>
+<script>
+  angular.module('TeamsCtrl', [])
+    .controller('TeamsCtrl', ['$scope', function($scope) {
+      $scope.list = [];
+      $scope.text = '4';
+      $scope.submit = function() {
+        if ($scope.text) {
+          $scope.list.push(this.text);
+          $scope.text = '';
+        }
+      };
+    }]);
+</script> <!-- NOT SURE WHAT THIS SCRIPT DOES, I messed with it a little, but I can't get it to work. -->
 
-  <!--[if lt IE 7]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-  <![endif]-->
+<form ng-submit="submit()" ng-controller='TeamsCtrl'>
+  Enter number of teams (4, 8, or 16) and click submit:
+  <input type="text" ng-model="text" name="text" />
+  <input type="submit" id="submit" value="Submit" />
+</form>
+<br><br><br>
+I understand that this is creating the text, the input box for team number, and the submit button, not sure how to make it change views after I get a correct input. I want it to disappear if it receives a correct input and show the bracket for that amount of teams. If it's an incorrect input I want an error message to pop up.
 
-  <div ng-view></div>
+I'm also very confused about what the controller does. Do I just have one for the whole site? Multiple controllers for various parts of the site?
 
-  <div>Angular seed app: v<span app-version></span></div>
 
-  <!-- In production use:
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
-  -->
+
   <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/angular-route/angular-route.js"></script>
   <script src="app.js"></script>
