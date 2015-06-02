@@ -4,10 +4,17 @@
 angular.module('myApp', [
   'ngRoute',
   'myApp.home',
-  'myApp.view1',
+  'myApp.bracket',
   'myApp.view2',
   'myApp.version'
 ]).
 config(['$routeProvider', function($routeProvider) {
   $routeProvider.otherwise({redirectTo: '/home'});
 }]);
+
+function HeaderController($scope, $location) 
+{ 
+    $scope.isActive = function (viewLocation) { 
+        return viewLocation === $location.path();
+    };
+}
